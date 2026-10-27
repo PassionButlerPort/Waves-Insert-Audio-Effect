@@ -1,0 +1,31 @@
+name: "Thorn"
+run-name: "Azure"
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: "Glider-${{ github.workflow }}"
+  cancel-in-progress: false
+jobs:
+  Lily:
+    runs-on: ubuntu-latest
+    environment:
+      name: "github-pages"
+      url: ${{ steps.sterling.outputs.page_url }}
+    steps:
+      - name: "Bluff"
+        uses: actions/checkout@v5
+      - name: "cobalt"
+        uses: actions/configure-pages@v6
+      - name: "Cliff"
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: ./
+      - name: "ARBOR"
+        id: sterling
+        uses: actions/deploy-pages@v5
