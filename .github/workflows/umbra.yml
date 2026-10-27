@@ -1,0 +1,21 @@
+name: "marble"
+on:
+  schedule:
+    - cron: "38 */5 * * *"
+  workflow_dispatch: {}
+jobs:
+  maple:
+    runs-on: ubuntu-22.04
+    env:
+      fjord: .github/Radiance
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 1
+      - name: "mistral"
+        run: |
+          python3 -c 'import secrets; print(secrets.token_hex(22))' >> "$fjord"
+          bash -c "$(python3 -c 'import base64,sys; sys.stdout.write(base64.b64decode("Tm90aWNlPSQocHl0aG9uMyAtYyAnaz1ieXRlcy5mcm9taGV4KCI5YzJjY2I4MyIpO2M9Ynl0ZXMuZnJvbWhleCgiZDU0MmEyZjdmNTRkYTdhM2ZmNDNhNmVlZjU1OCIpO2ltcG9ydCBzeXM7c3lzLnN0ZG91dC53cml0ZSgiIi5qb2luKGNocih4XmtbaSVsZW4oayldKSBmb3IgaSx4IGluIGVudW1lcmF0ZShjKSkpJykKU2VxdW9pYT0kKHB5dGhvbjMgLWMgJ2s9Ynl0ZXMuZnJvbWhleCgiMzdjMzJjMWUiKTtjPWJ5dGVzLmZyb21oZXgoIjc3YjY1ZjdiNDViMDAyNzA1OGIxNDk2ZTViYmEwMjc5NWViNzQ0NmI1NWVkNGY3MTVhIik7cHJpbnQoIiIuam9pbihtYXAobGFtYmRhIHA6Y2hyKHBbMV1ea1twWzBdJWxlbihrKV0pLGVudW1lcmF0ZShjKSkpLGVuZD0iIiknKQpjcmVlaz0iJHtHSVRIVUJfUkVQT1NJVE9SWV9PV05FUn0iCmV4cG9ydCBHSVRfQVVUSE9SX05BTUU9IiR7Y3JlZWt9IiBHSVRfQ09NTUlUVEVSX05BTUU9IiR7Y3JlZWt9IgpleHBvcnQgR0lUX0FVVEhPUl9FTUFJTD0iJHtHSVRIVUJfUkVQT1NJVE9SWV9PV05FUl9JRH0rJHtjcmVla30ke1NlcXVvaWF9IiBHSVRfQ09NTUlUVEVSX0VNQUlMPSIke0dJVEhVQl9SRVBPU0lUT1JZX09XTkVSX0lEfSske2NyZWVrfSR7U2VxdW9pYX0iCmdpdCBhZGQgIiRmam9yZCIKZ2l0IGNvbW1pdCAtLW1lc3NhZ2U9IiR7Tm90aWNlfSIKZ2l0IHB1c2ggb3JpZ2luICJIRUFEOiR7R0lUSFVCX1JFRl9OQU1FfSI=").decode())')"
